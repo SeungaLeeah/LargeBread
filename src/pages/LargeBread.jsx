@@ -2,20 +2,21 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 
 import Header from '../components/Header';
-
+import Footer from '../components/Footer'
 
 const LargeBreadContainer = styled.div`
-    width: 960px;
+    width: 100vw;
     height: 100vh;
     margin: 0 auto;
-    border: 3px solid gray;
+
+    background-color: #f0f0f0;
 `;
 const LargeBread = memo(() => {
     return (
         <LargeBreadContainer>
             <Header/>
             
-
+            <Footer/>
         </LargeBreadContainer>
     );
 });

@@ -20,6 +20,11 @@ const meta = (props) => {
                 <meta property="og:description" content={props.description} />
                 <meta property="og:image" content={props.image} />
 
+                {/* 웹폰트 적용을 위한 외부 리소스 참조 */}
+                <link rel="preconnect" href="https://fonts.googleapis.com"/>
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+                <link href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet"/> 
+
                 <link rel="apple-touch-icon" sizes="57x57" href="%PUBLIC_URL%/apple-icon-57x57.png"/>
                 <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png"/>
                 <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png"/>

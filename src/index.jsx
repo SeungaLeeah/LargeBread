@@ -4,7 +4,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
-import Meta from './components/meta';
+import Meta from './Meta'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
