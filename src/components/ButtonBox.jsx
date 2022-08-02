@@ -13,6 +13,7 @@ const ButtonContainer = styled.div`
     margin: auto;
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
     
     .system-info{
         width: 100%;

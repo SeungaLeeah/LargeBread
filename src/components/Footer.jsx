@@ -7,7 +7,7 @@ const Bottom =styled.div`
     width: 100vw;
     height: 250px;
     display: flex;
-
+    background-color: #f0f0f0;
 `;
 const Footer = memo(() => {
     return (

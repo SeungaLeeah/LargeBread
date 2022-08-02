@@ -2,12 +2,13 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const ItemBtn = styled.div`
-     width: 90%;
+    width: 90%;
     margin: auto;
     text-align: center;
     height: 33.3%;
     display: flex;
     align-items: center;
+    
     .item-choseBtn{
         align-items: center;
         background-color: white;
