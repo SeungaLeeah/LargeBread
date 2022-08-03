@@ -5,7 +5,7 @@ import SingleItem from './SingleItem';
 const ItemListContainer = styled.div`
     width: 100vw;
     height: 100vh;
-    background-color: red;
+    background-color: #f0f0f0;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

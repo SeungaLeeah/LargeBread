@@ -10,7 +10,7 @@ justify-content: space-evenly;
 div{
     width: 150px;
     height: 150px;
-    background-color: white;
+    background-color: #ae2a2f;
     box-sizing: border-box;
     margin: 10px;
     
