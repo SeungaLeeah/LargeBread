@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import logo from '../assets/img/logo/logo.png';
 
 const Header = styled.div`
-    width: 100vw;
+    width: 100%;
     height: 150px;
     margin: 0 auto;
     background-color: #fec24a;

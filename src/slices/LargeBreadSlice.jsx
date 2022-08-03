@@ -1,11 +1,11 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import axios from 'axios';
-
+const API_URL = "http://localhost:3001/ca"
 export const getLargeBread = createAsyncThunk("LargeBreadSlice/getLargeBread", async(payload,{rejectWithValue})=>{
   let result = null;
 
   try{
-    result = await axios.get('');
+    result = await axios.get(API_URL);
   }catch(err) {
     result = rejectWithValue(err.response);
   }
