@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import {getLargeBread} from '../slices/LargeBreadSlice';
+import {getList} from '../slices/LargeBreadSlice';
 
 const SingleItemContainer = styled.div`
 height: 100%;
@@ -15,6 +15,7 @@ width: 100%;
         .itemList{
             text-align: center;
             margin: auto;
+            padding: 10px 0;
             .imageBox{
                 width: 150px;
                 height: 150px;
@@ -25,6 +26,23 @@ width: 100%;
                 font-weight: 700;
                 padding:5px 0 ;
             }
+            P{
+                padding-bottom:10px;
+            }
+            .choice{
+                width: 150px;
+                height: 40px;
+                border-radius: 5px;
+                margin: auto;
+                border: 2px solid #ae2a2f;
+                font-weight: 700;
+                color: #222;
+                &:hover{
+                    background-color: #ae2a2f;
+                    color: white;
+                    
+                }
+            }
         }
     }
 `;
@@ -32,11 +50,11 @@ const SingleItem = memo(() => {
  
     useEffect(()=>console.clear(),[]);
 
-    const {data, error} = useSelector((state)=>state.LargeBread);
+    const {data, error} = useSelector((state)=>state.LargeBreadSlice);
 
     const dispatch = useDispatch();
     useEffect(()=>{
-        dispatch(getLargeBread());
+        dispatch(getList());
     }, [dispatch]);
 
     return (
@@ -48,10 +66,11 @@ const SingleItem = memo(() => {
             ):(
                 <div className='itemBox'>
                 {data && data.map((v,i)=>(
-                    <div key={i} className="itemList">
+                    <div key={v.id} className="itemList">
                         <img className='imageBox' src={v.image} alt={v.name} />
                         <h3>{v.name}</h3>
                         <p>{v.price}</p>
+                        <button className='choice' data-id={v.id}>선택하기</button>
                     </div>
                 ))}
                 </div>

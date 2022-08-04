@@ -3,7 +3,7 @@ import LargeBreadSlice from './slices/LargeBreadSlice';
 
 const store = configureStore({
     reducer: {
-        LargeBread:LargeBreadSlice
+        LargeBreadSlice:LargeBreadSlice
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}),
     devTools: true

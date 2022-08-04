@@ -47,8 +47,8 @@ const ItemBox = memo(() => {
         <ButtonContainer>
             <div className='system-info'>
             <div className='time-info'>
-                <h3>남은시간</h3>
-                <p><b>100</b>초</p>
+                <h3>선택수량</h3>
+                <p><b>100</b>개</p>
             </div>
             <DelButton/>
             </div>
