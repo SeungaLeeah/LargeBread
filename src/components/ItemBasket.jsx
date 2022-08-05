@@ -19,18 +19,17 @@ const ItemBasket = memo(() => {
     useEffect(()=>{
         dispatch(getList());
     }, [dispatch]);
-    console.log(data);
 
     return (
         <BasketContainer>
                 {error?(
                 <div>
-                    <h1>{error.code}이러한 에러가 발생했습니다.</h1>
+                <h1>이와 같은 에러가 발생했습니다. <br/> : {error.code}</h1>
                 </div>
             ):(
                 <div className='itemBox'>
                 {data && data.map((v,i)=>(
-                    <div key={v.id} className="itemList">
+                    <div key={i} className="itemList">
                         <img className='imageBox' src={v.image} alt={v.name} />
                         <h3>{v.name}</h3>
                         <p>{v.price}</p>

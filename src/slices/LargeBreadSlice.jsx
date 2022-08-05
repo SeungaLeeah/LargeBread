@@ -12,9 +12,9 @@ export const getList = createAsyncThunk('LargeBreadSlice/getList', async(payload
   try {
     result = await axios.get(API_URL,{
       params:{
-        query: payload?.query,
-        page: payload.page,
-        rows: payload.rows
+        name: payload.name,
+        image: payload.image,
+        price: payload.price
       }
     });
   }catch(err){
@@ -54,7 +54,7 @@ export const putItem = createAsyncThunk('LargeBreadSlice/putItem', async(payload
   let result = null;
   
   try{
-    result = await axios.put(`${API_URL}${payload?.id}/`,{
+    result = await axios.put(API_URL,{
       name: payload.name,
       image: payload.image,
       price: payload.price
