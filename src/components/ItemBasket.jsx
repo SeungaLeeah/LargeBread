@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from  'react-redux';
 import {getList} from '../slices/LargeBreadSlice'
 
 const BasketContainer = styled.div`
