@@ -9,13 +9,14 @@ const API_URL = "http://localhost:3001/ca/";
 export const getList = createAsyncThunk('LargeBreadSlice/getList', async(payload,{rejectValue})=>{
   let result = null;
   
+  const params = {};
+  if (payload?.name){
+    params.name = payload.name
+  }
+
   try {
     result = await axios.get(API_URL,{
-      params:{
-        name: payload.name,
-        image: payload.image,
-        price: payload.price
-      }
+      params:params
     });
   }catch(err){
     result = rejectValue(err.response);
@@ -34,6 +35,7 @@ export const getItem  = createAsyncThunk('LargeBreadSlice/ getItem', async(paylo
   }
   return result;
 });
+
 /* 데이터 저장을 위한 비동기 함수 */
 export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(payload, { rejectWithValue})=>{
   let result = null;
@@ -49,12 +51,13 @@ export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(paylo
   }
   return result;
 });
+
 /* 데이터 수정을 위한 비동기 함수 */
 export const putItem = createAsyncThunk('LargeBreadSlice/putItem', async(payload, { rejectWithValue})=>{
   let result = null;
   
   try{
-    result = await axios.put(API_URL,{
+    result = await axios.put(`${API_URL}${payload?.id}/`,{
       name: payload.name,
       image: payload.image,
       price: payload.price

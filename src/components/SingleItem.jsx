@@ -69,7 +69,7 @@ const SingleItem = memo(() => {
                     <div key={i} className="itemList">
                         <img className='imageBox' src={v.image} alt={v.name} />
                         <h3>{v.name}</h3>
-                        <p>{v.price}</p>
+                        <p>{v.price}원</p>
                         <button className='choice' data-id={v.id}>선택하기</button>
                     </div>
                 ))}
