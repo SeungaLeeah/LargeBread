@@ -100,17 +100,68 @@ const LargeBreadSlice = createSlice({
 
   /* 데이터 저장을 위한 액션 함수 */
   [postItem.pending]: pending,
-  [postItem.fulfilled]: fulfilled,
+  [postItem.fulfilled]: (state,{meta,payload})=>{
+    let data = null;
+
+    if(Array.isArray(state.data)){
+      data=[...state.data];
+      data.push(payload.data);
+    }else{
+      data=payload.data;
+    }
+    return{
+      data: data,
+      loading: false,
+      error: null
+    }
+  },
   [postItem.rejected]: rejected,
 
   /* 데이터 수정을 위한 액션 함수 */
   [putItem.pending]: pending,
-  [putItem.fulfilled]: fulfilled,
+  [putItem.fulfilled]: (state,{meta, payload})=>{
+    let data = null;
+
+    if(Array.isArray(state.data)){
+      data= [...state.data];
+
+      const index = data.findIndex(element => element.id === parseInt(meta.arg.id));
+
+      if(index !== undefined){
+        data.splice(index, 1, payload.data);
+      }
+    }else{
+      data = payload.data;
+    }
+    return{
+      data: data,
+      loading: false,
+      error: null
+    }
+  },
   [putItem.rejected]: rejected,
 
   /* 데이터 삭제를 위한 액션 함수 */
   [deleteItem.pending]: pending,
-  [deleteItem.fulfilled]: fulfilled,
+  [deleteItem.fulfilled]: (state,{meta,payload})=>{
+    let data = null;
+
+    if(Array.isArray(state.data)){
+      data = [...state.data];
+
+      const index = data.findIndex(element => element.id === parseInt(meta.arg.id));
+      console.log('index=' + index);
+
+      if(index !== undefined){
+        data.splice(index, 1);
+      }
+    }
+    return{
+      data: data,
+      loading:false,
+      error: null
+    }
+  },
   [deleteItem.rejected]: rejected,
 
   },

@@ -26,15 +26,9 @@
     },
     {
       "id": 5,
-      "name": "몽쉘 케이크",
-      "image": "https://img.79plus.co.kr/megahp/manager/upload/menu/20220701142556_1656653156193_zNcKXX0_3N.jpg",
+      "name": "초코 케이크",
+      "image": "https://img.79plus.co.kr/megahp/manager/upload/menu/20220704112422_1656901462139_JSxU5sBxAN.jpg",
       "price": 5500
-    },
-    {
-      "name": "멜팅 카라멜 케이크",
-      "image": "http://www.margo.co.kr/wp-content/uploads/2020/08/IMG_1408_re-1.jpg",
-      "price": 5000,
-      "id": 7
     }
   ],
   "m": [
