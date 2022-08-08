@@ -2,6 +2,7 @@ import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import {getList} from '../slices/LargeBreadSlice';
+import {addToBasket} from '../slices/BasketSlice';
 
 const SingleItemContainer = styled.div`
 height: 100%;
@@ -50,27 +51,35 @@ const SingleItem = memo(() => {
  
     useEffect(()=>console.clear(),[]);
 
-    const {data, error} = useSelector((state)=>state.LargeBreadSlice);
-
+    const {data,loading, error} = useSelector((state)=>state.LargeBreadSlice);
     const dispatch = useDispatch();
+
+    const handleAddToBasket =(item) =>{
+        dispatch(addToBasket(item));    
+    }
+
     useEffect(()=>{
         dispatch(getList());
     }, [dispatch]);
     console.log(data);
     return (
         <SingleItemContainer>
-            {error?(
+            {loading ?(
+                    <p> Loading...</p>
+                ): error?(
                 <div>
                     <h1>이와 같은 에러가 발생했습니다. <br/> : {error.code}</h1>
                 </div>
             ):(
                 <div className='itemBox'>
-                {data && data.map((v,i)=>(
+                {data && data.map((item,i)=>(
                     <div key={i} className="itemList">
-                        <img className='imageBox' src={v.image} alt={v.name} />
-                        <h3>{v.name}</h3>
-                        <p>{v.price}원</p>
-                        <button className='choice' data-id={v.id}>선택하기</button>
+                        <img className='imageBox' src={item.image} alt={item.name} />
+                        <h3>{item.name}</h3>
+                        <p>{item.price}원</p>
+                        <button onClick={()=> handleAddToBasket(item)} className='choice' data-id={item.id}>
+                            선택하기
+                        </button>
                     </div>
                 ))}
                 </div>

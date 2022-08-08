@@ -42,7 +42,7 @@ const ItemBasket = memo(() => {
     useEffect(()=>console.clear(),[]);
     useEffect(()=>console.clear(),[]);
 
-    const {data, error} = useSelector((state)=>state.LargeBreadSlice);
+    const {data,loading, error} = useSelector((state)=>state.LargeBreadSlice);
 
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -52,7 +52,9 @@ const ItemBasket = memo(() => {
     
     return (
         <BasketContainer>
-                {error?(
+                {loading ?(
+                    <p> Loading...</p>
+                ): error?(
                 <div>
                 <h1>이와 같은 에러가 발생했습니다. <br/> : {error.code}</h1>
                 </div>
