@@ -10,16 +10,12 @@ const BasketContainer = styled.div`
     border-radius: 5px;
     margin:20px 10px;
     .itemBox{
-        width: 100%;
-        margin: auto;
         .itemList{ 
             display: flex;
             justify-content: space-around;
             padding: 15px 0;
 
             .basketItem{
-                width: 10%;
-                align-items: center;
                 .imageBox{
                     border: 1px solid #eee;
                     width: 100px;
@@ -34,7 +30,7 @@ const BasketContainer = styled.div`
                 h3{
                     
                     font-weight: 700;
-                    padding: 5px 0 ;
+                    padding: 10px 0 ;
                     font-size: 14px;
                 }
                 button{
@@ -54,12 +50,30 @@ const BasketContainer = styled.div`
             .basketItem-price,    
             .basketItem-quantity,
             .total-price{
-            width: 10%;
             display: flex;
             flex-direction: row;
             align-items: center;
             }
-        
+        .basketItem-quantity{
+            button{
+                border: none;
+                border-radius: 5px;
+                background-color: #ae2a2f;
+                color: white;
+                padding: 3px 10px;
+                font-size: 16px;
+                font-weight: 900;
+                &:hover{
+                    background-color: white;
+                    border: 1px solid #ae2a2f;
+                    border-radius: 5px;
+                    color: #ae2a2f;
+                }
+            }
+            .count{
+                padding: 15px;
+            }
+        }
     }
 }
 `;
