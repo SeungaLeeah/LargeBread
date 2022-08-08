@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from  'react-redux';
-import {getList} from '../slices/LargeBreadSlice'
+import { useSelector } from  'react-redux';
+
 
 const BasketContainer = styled.div`
     width: 65%;
@@ -10,66 +10,90 @@ const BasketContainer = styled.div`
     border-radius: 5px;
     margin:20px 10px;
     .itemBox{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-  
-        .itemList{
-            text-align: center;
-            margin: auto;
+        width: 100%;
+        margin: auto;
+        .itemList{ 
+            display: flex;
+            justify-content: space-around;
             padding: 15px 0;
-            .imageBox{
-                border: 1px solid #eee;
-                width: 100px;
-                height: 100px;
-                box-sizing: border-box;
-                margin: 10px; 
+
+            .basketItem{
+                width: 10%;
+                align-items: center;
+                .imageBox{
+                    border: 1px solid #eee;
+                    width: 100px;
+                    height: 100px;
+                    box-sizing: border-box;
+                    
+                }
+                .basketItem-info{
+                    width: 100%;
+
+                    text-align: center;
+                h3{
+                    
+                    font-weight: 700;
+                    padding: 5px 0 ;
+                    font-size: 14px;
+                }
+                button{
+                    border: 2px solid #f0f0f0;
+                    border-radius: 5px;
+                    background-color: white;
+                    padding: 5px 7px;
+                    font-size: 12px;
+                    font-weight: 100;
+                &:hover{
+                    background-color: #f0f0f0;
+                    color: black;
+                }
+                }
+                }
             }
-            h3{
-                font-weight: 700;
-                padding: 5px 0 ;
-                font-size: 14px;
+            .basketItem-price,    
+            .basketItem-quantity,
+            .total-price{
+            width: 10%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
             }
-            P{
-                padding-top: 5px;
-                font-size: 12px;
-            }
-        }
+        
     }
+}
 `;
 const ItemBasket = memo(() => {
     useEffect(()=>console.clear(),[]);
-    useEffect(()=>console.clear(),[]);
 
-    const {data,loading, error} = useSelector((state)=>state.LargeBreadSlice);
 
-    const dispatch = useDispatch();
-    useEffect(()=>{
-        dispatch(getList());
-    }, [dispatch]);
-    console.log(data);
-    
+    const basket = useSelector((state)=>state.basket);
+
     return (
         <BasketContainer>
-                {loading ?(
-                    <p> Loading...</p>
-                ): error?(
-                <div>
-                <h1>이와 같은 에러가 발생했습니다. <br/> : {error.code}</h1>
-                </div>
-            ):(
                 <div className='itemBox'>
-                 {data && data.map((v,i)=>(
-                    <div key={i} className="itemList">
-                        <img className='imageBox' src={v.image} alt={v.name} />
-                        <h3>{v.name}</h3>
-                        <p>총 갯수</p>
-
+                 {basket.basketItems?.map(basketItem=>(
+                    <div key={basketItem.id} className="itemList">
+                        <div className='basketItem'>
+                            <img className='imageBox' src={basketItem.image} alt={basketItem.name} />
+                            <div className='basketItem-info'>
+                                <h3>{basketItem.name}</h3>
+                                <button>주문삭제</button>
+                            </div>
+                        </div>
+                        <div className='basketItem-price'>{basketItem.price}</div>
+                        <div className='basketItem-quantity'>
+                            <button>-</button>
+                            <div className='count'>{basketItem.basketQuantity}</div>
+                            <button>+</button>
+                        </div>
+                        <div className='total-price'>
+                            ${basketItem.price * basketItem.basketQuantity}
+                        </div>
                     </div>
                 ))}
                 </div>
-            )}
+
         </BasketContainer>
     );
 });

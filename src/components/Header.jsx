@@ -54,8 +54,8 @@ const Header = styled.div`
                     cursor: pointer;
                     
                     &:hover{
-                        background-color: #ae2a2f;
-                        color: white;
+                        background-color: #f0f0f0;
+                        color: #ae2a2f;
                         border-radius: 5px 5px 0 0;
                     }
                 }
