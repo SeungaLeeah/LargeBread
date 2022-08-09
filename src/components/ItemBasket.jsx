@@ -17,13 +17,7 @@ const BasketContainer = styled.div`
             padding: 15px 0;
 
             .basketItem{
-                .imageBox{
-                    border: 1px solid #eee;
-                    width: 100px;
-                    height: 100px;
-                    box-sizing: border-box;
-                    
-                }
+            
                 .basketItem-info{
                     width: 100%;
 
@@ -101,7 +95,6 @@ const dispatch = useDispatch();
                  {basket.basketItems?.map(basketItem=>(
                     <div key={basketItem.id} className="itemList">
                         <div className='basketItem'>
-                            <img className='imageBox' src={basketItem.image} alt={basketItem.name} />
                             <div className='basketItem-info'>
                                 <h3>{basketItem.name}</h3>
                                 <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
