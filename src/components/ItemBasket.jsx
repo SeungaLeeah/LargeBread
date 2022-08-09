@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector } from  'react-redux';
+import { useSelector,useDispatch } from  'react-redux';
+import { addToBasket, removeFromBasket, DecreaseBasket, } from '../slices/BasketSlice';
 
 
 const BasketContainer = styled.div`
@@ -79,6 +80,17 @@ const BasketContainer = styled.div`
 `;
 const ItemBasket = memo(() => {
     useEffect(()=>console.clear(),[]);
+const dispatch = useDispatch();
+
+    const handleRemoveFromBasket = (basketItem)=>{
+        dispatch(removeFromBasket(basketItem));
+    }
+    const handleDecreaseBasket = (basketItem)=>{
+        dispatch(DecreaseBasket(basketItem));
+    }
+    const handleIncreaseBasket = (basketItem)=>{
+        dispatch(addToBasket(basketItem));
+    }
 
 
     const basket = useSelector((state)=>state.basket);
@@ -92,17 +104,17 @@ const ItemBasket = memo(() => {
                             <img className='imageBox' src={basketItem.image} alt={basketItem.name} />
                             <div className='basketItem-info'>
                                 <h3>{basketItem.name}</h3>
-                                <button>주문삭제</button>
+                                <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
                             </div>
                         </div>
-                        <div className='basketItem-price'>{basketItem.price}</div>
+                        <div className='basketItem-price'>{basketItem.price}원</div>
                         <div className='basketItem-quantity'>
-                            <button>-</button>
+                            <button onClick={()=>handleDecreaseBasket(basketItem)}>-</button>
                             <div className='count'>{basketItem.basketQuantity}</div>
-                            <button>+</button>
+                            <button onClick={()=>handleIncreaseBasket(basketItem)}>+</button>
                         </div>
                         <div className='total-price'>
-                            ${basketItem.price * basketItem.basketQuantity}
+                            {basketItem.price * basketItem.basketQuantity}원
                         </div>
                     </div>
                 ))}

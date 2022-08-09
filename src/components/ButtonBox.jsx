@@ -47,7 +47,7 @@ const ItemBox = memo(() => {
         <ButtonContainer>
             <div className='system-info'>
             <div className='time-info'>
-                <h3>선택수량</h3>
+                <h3>총 결재금액</h3>
                 <p><b>100</b>개</p>
             </div>
             <DelButton/>
