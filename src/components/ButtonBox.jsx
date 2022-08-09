@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo,useEffect  } from 'react';
 import styled from 'styled-components';
 import DelButton from './DelButton';
 import ItemButton from './ItemButton';
 import PayButton from './PayButton';
-
+import {TotalPrice} from '../slices/BasketSlice'
+import { useDispatch, useSelector } from 'react-redux';
 
 const ButtonContainer = styled.div`
     width: 30%;
@@ -43,12 +44,21 @@ const ButtonContainer = styled.div`
 `;
 
 const ItemBox = memo(() => {
+    useEffect(()=>console.clear(),[]);
+    const {basketTotalAmount} = useSelector((state)=>state.basket);
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(TotalPrice())
+    },[basketTotalAmount, dispatch]);
+
+    
     return (
         <ButtonContainer>
             <div className='system-info'>
             <div className='time-info'>
                 <h3>총 결재금액</h3>
-                <p><b>100</b>개</p>
+                <p><b>{basketTotalAmount}</b>원</p>
             </div>
             <DelButton/>
             </div>

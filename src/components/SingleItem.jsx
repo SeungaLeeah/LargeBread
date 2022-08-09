@@ -61,7 +61,7 @@ const SingleItem = memo(() => {
     useEffect(()=>{
         dispatch(getList());
     }, [dispatch]);
-    console.log(data);
+  
     return (
         <SingleItemContainer>
             {loading ?(

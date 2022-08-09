@@ -47,10 +47,32 @@ const BasketSlice = createSlice({
             localStorage.setItem("basketItems", JSON.stringify(state.basketItems));
         },
 
-        cleanBasket(state, action)
+        cleanBasket(state, action){
+            state.basketItems=[]
+            localStorage.setItem("basketItems", JSON.stringify(state.basketItems));
+        },
+        TotalPrice(state, action){
+          let {total,quantity} = state.basketItems.reduce(
+                (basketTotal, basketItem)=>{
+                const {price, basketQuantity } = basketItem;
+                const itemTotal = price *basketQuantity;
+
+                basketTotal.total += itemTotal
+                basketTotal.quantity += basketQuantity
+                
+                return basketTotal;
+                },
+                {
+                    total: 0,
+                    quantity: 0,
+                }
+            );
+            state.basketTotalQuantity = quantity;
+            state.basketTotalAmount = total;
+        }
     },
 });
 
-export const { addToBasket, removeFromBasket, DecreaseBasket } = BasketSlice.actions;
+export const { addToBasket, removeFromBasket, DecreaseBasket, cleanBasket, TotalPrice } = BasketSlice.actions;
 
 export default BasketSlice.reducer;

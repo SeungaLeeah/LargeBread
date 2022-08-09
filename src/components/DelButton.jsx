@@ -1,9 +1,12 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
+import { useDispatch } from  'react-redux';
+import {cleanBasket} from '../slices/BasketSlice'
+
 const DelBtn = styled.div`
+width:30%;
     font-size: 14px;
     font-weight: 700;
-    width: 30%;
     color: white;
     background-color: #4c4747;
     text-align: center;
@@ -11,11 +14,19 @@ const DelBtn = styled.div`
     border-radius: 5px;
     &:hover{
         background-color: black;
-    }
+    
+    }   
 `;
 const DelButton = memo(() => {
+    useEffect(()=>console.clear(),[]);
+    const dispatch = useDispatch();
+
+    const handleCleanFromBasket = ()=>{
+        dispatch(cleanBasket());
+    }
+   
     return (
-        <DelBtn>
+        <DelBtn  onClick={()=>handleCleanFromBasket()}>
             전체삭제
         </DelBtn>
     );
