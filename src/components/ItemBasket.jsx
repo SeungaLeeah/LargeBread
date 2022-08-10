@@ -10,6 +10,7 @@ const BasketContainer = styled.div`
     background-color: white;
     border-radius: 5px;
     margin:20px 10px;
+    overflow: scroll;
     .itemBox{
         .itemList{ 
             display: flex;
@@ -17,11 +18,10 @@ const BasketContainer = styled.div`
             padding: 15px 0;
 
             .basketItem{
-            
+                width: 120px;
                 .basketItem-info{
                     width: 100%;
-
-                    text-align: center;
+                    
                 h3{
                     
                     font-weight: 700;
@@ -36,8 +36,8 @@ const BasketContainer = styled.div`
                     font-size: 12px;
                     font-weight: 100;
                 &:hover{
-                    background-color: #f0f0f0;
-                    color: black;
+                    background-color: black;
+                    color: white;
                 }
                 }
                 }
