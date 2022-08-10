@@ -54,36 +54,26 @@ const SingleItem = memo(() => {
     const {data,loading, error} = useSelector((state)=>state.LargeBreadSlice);
     const dispatch = useDispatch();
 
-    const handleAddToBasket =(item) =>{
-        dispatch(addToBasket(item));    
+    const handleAddToBasket =(i) =>{
+        dispatch(addToBasket(i));    
     }
 
     useEffect(()=>{
         dispatch(getList());
     }, [dispatch]);
-  
+    
+    
     return (
         <SingleItemContainer>
-            {loading ?(
-                    <p> Loading...</p>
-                ): error?(
-                <div>
-                    <h1>이와 같은 에러가 발생했습니다. <br/> : {error.code}</h1>
-                </div>
-            ):(
-                <div className='itemBox'>
-                {data && data.map((item,i)=>(
-                    <div key={i} className="itemList">
-                        <img className='imageBox' src={item.image} alt={item.name} />
-                        <h3>{item.name}</h3>
-                        <p>{item.price}원</p>
-                        <button onClick={()=> handleAddToBasket(item)} className='choice' data-id={item.id}>
-                            선택하기
-                        </button>
-                    </div>
-                ))}
-                </div>
-            )}
+            {data && data.data.item.map((v, i) => {
+                return(
+                    <>
+                        <img className='imageBox' src={'http://localhost:3001/'+ v.img_url} alt={v.product_name} />
+                        <h3>{v.product_name}</h3>
+                        <p>{v.price}원</p>
+                    </>
+                );
+            })}
         </SingleItemContainer>
     );
 });

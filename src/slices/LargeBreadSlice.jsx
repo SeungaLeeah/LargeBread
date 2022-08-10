@@ -3,21 +3,16 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import {pending, fulfilled, rejected} from '../Action';
 import axios from 'axios';
 
-const API_URL = "http://localhost:3001/ca/";
+const API_URL = "http://localhost:3001/product/";
 
 /* 다중행 데이터 조회를 위한 비동기 함수 */
 export const getList = createAsyncThunk('LargeBreadSlice/getList', async(payload,{rejectValue})=>{
   let result = null;
   
-  const params = {};
-  if (payload?.name){
-    params.name = payload.name
-  }
+  
 
   try {
-    result = await axios.get(API_URL,{
-      params:params
-    });
+    result = await axios.get(API_URL);
   }catch(err){
     result = rejectValue(err.response);
   }
@@ -94,9 +89,9 @@ const LargeBreadSlice = createSlice({
   [getList.rejected]: rejected,
 
   /* 단일행 데이터 조회를 위한 액션 함수 */
-  [getList.pending]: pending,
-  [getList.fulfilled]: fulfilled,
-  [getList.rejected]: rejected,
+  [getItem.pending]: pending,
+  [getItem.fulfilled]: fulfilled,
+  [getItem.rejected]: rejected,
 
   /* 데이터 저장을 위한 액션 함수 */
   [postItem.pending]: pending,
