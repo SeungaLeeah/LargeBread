@@ -14,11 +14,11 @@ const BasketContainer = styled.div`
     .itemBox{
         .itemList{ 
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly;
             padding: 15px 0;
 
             .basketItem{
-                width: 120px;
+                width: 200px;
                 .basketItem-info{
                     width: 100%;
                     

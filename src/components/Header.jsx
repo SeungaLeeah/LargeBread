@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import logo from '../assets/img/logo/logo.png';
+import { NavLink} from 'react-router-dom';
 
 const Header = styled.div`
     width: 100%;
@@ -46,7 +47,8 @@ const Header = styled.div`
                 justify-content: space-between;
                 line-height: 40px;
                 
-                li{
+                .menuList{
+                    text-decoration: none;
                     font-size: 16px;
                     font-weight: 600;
                     color: white;
@@ -77,13 +79,13 @@ const header = memo(() => {
             <div className='main-menu'>
                 <div className='category'>
                     <ul>
-                        <li>케이크</li>
-                        <li>마카롱</li>
-                        <li>크로플</li>
-                        <li>샌드위치</li>
-                        <li>쿠키</li>
-                        <li>빵</li>
-                        <li>기타</li>
+                        <NavLink className="menuList" to={'/product/1'}>케이크</NavLink>
+                        <NavLink className="menuList" to={'/product/2'}>마카롱</NavLink>
+                        <NavLink className="menuList" to={'/product/3'}>크로플</NavLink>
+                        <NavLink className="menuList" to={'/product/4'}>샌드위치</NavLink>
+                        <NavLink className="menuList" to={'/product/5'}>쿠키</NavLink>
+                        <NavLink className="menuList" to={'/product/6'}>빵</NavLink>
+                        <NavLink className="menuList" to={'/product/7'}>기타</NavLink>
                     </ul>
                 </div>
             </div>
