@@ -12,6 +12,7 @@ width:30%;
     text-align: center;
     padding: 25px 17px;
     border-radius: 5px;
+    cursor: pointer;
     &:hover{
         background-color: black;
     

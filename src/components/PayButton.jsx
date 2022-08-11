@@ -18,6 +18,7 @@ const PayBtn = styled.div`
         height: 90%;
         line-height: 450%;
         border-radius: 5px;
+        cursor: pointer;
         &:hover{
             background-color: #fec24a;
             color: white;

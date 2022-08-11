@@ -25,7 +25,9 @@ width: 100%;
             }
             h3{
                 font-weight: 700;
-                padding:5px 0 ;
+                padding:5px 0;
+                font-size: 14px;
+                
             }
             P{
                 padding-bottom:10px;
@@ -38,6 +40,7 @@ width: 100%;
                 border: 2px solid #ae2a2f;
                 font-weight: 700;
                 color: #222;
+                cursor: pointer;
                 &:hover{
                     background-color: #ae2a2f;
                     color: white;
@@ -54,8 +57,8 @@ const SingleItem = memo(() => {
     const {data,loading, error} = useSelector((state)=>state.LargeBreadSlice);
     const dispatch = useDispatch();
 
-    const handleAddToBasket =(i) =>{
-        dispatch(addToBasket(i));    
+    const handleAddToBasket =(item) =>{
+        dispatch(addToBasket(item));    
     }
 
     useEffect(()=>{
@@ -65,15 +68,28 @@ const SingleItem = memo(() => {
     
     return (
         <SingleItemContainer>
+            {loading ?(
+                    <p> Loading...</p>
+                ): error?(
+                <div>
+                    <h1>이와 같은 에러가 발생했습니다. <br/> : {error.code}</h1>
+                </div>
+            ):(
+                <div className='itemBox'>
             {data && data.data.item.map((v, i) => {
                 return(
-                    <>
-                        <img className='imageBox' src={'http://localhost:3001/'+ v.img_url} alt={v.product_name} />
-                        <h3>{v.product_name}</h3>
-                        <p>{v.price}원</p>
-                    </>
-                );
+                    <div className="itemList">
+                    <img className='imageBox'src={'http://localhost:3001/'+ v.img_url} alt={v.product_name}  />
+                    <h3>{v.product_name}</h3>
+                    <p>{v.price}원</p>
+                    <button onClick={()=> handleAddToBasket(v)} className='choice' data-id={v.id}>
+                        선택하기
+                    </button>
+                </div>
+               );
             })}
+                 </div>
+            )}
         </SingleItemContainer>
     );
 });

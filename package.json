@@ -2,6 +2,7 @@
   "name": "largebread",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.14.1",
@@ -47,5 +48,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/juaehan/LargeBread.git",
+  "author": "SeungaLeeah <92766716+SeungaLeeah@users.noreply.github.com>",
+  "license": "MIT"
 }

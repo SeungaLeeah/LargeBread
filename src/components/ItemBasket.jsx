@@ -27,6 +27,7 @@ const BasketContainer = styled.div`
                     font-weight: 700;
                     padding: 10px 0 ;
                     font-size: 14px;
+                    color: black;
                 }
                 button{
                     border: 2px solid #f0f0f0;
@@ -35,6 +36,7 @@ const BasketContainer = styled.div`
                     padding: 5px 7px;
                     font-size: 12px;
                     font-weight: 100;
+                    cursor: pointer;
                 &:hover{
                     background-color: black;
                     color: white;
@@ -58,6 +60,7 @@ const BasketContainer = styled.div`
                 padding: 3px 10px;
                 font-size: 16px;
                 font-weight: 900;
+                cursor: pointer;
                 &:hover{
                     background-color: white;
                     border: 1px solid #ae2a2f;
@@ -96,7 +99,7 @@ const dispatch = useDispatch();
                     <div key={basketItem.id} className="itemList">
                         <div className='basketItem'>
                             <div className='basketItem-info'>
-                                <h3>{basketItem.name}</h3>
+                                <h3>{basketItem.product_name}</h3>
                                 <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
                             </div>
                         </div>

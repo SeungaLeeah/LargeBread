@@ -19,6 +19,7 @@ const ItemBtn = styled.div`
         height: 90%;
         line-height: 450%;
         border-radius: 5px;
+        cursor: pointer;
         &:hover{
             background-color: #ae2a2f;
             color: white;

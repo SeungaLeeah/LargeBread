@@ -9,7 +9,10 @@ const API_URL = "http://localhost:3001/product/1/";
 export const getList = createAsyncThunk('LargeBreadSlice/getList', async(payload,{rejectValue})=>{
   let result = null;
   
-  
+  const params = {};
+  if (payload?.product_name){
+    params.product_name = payload.name
+  }
 
   try {
     result = await axios.get(API_URL);
@@ -37,8 +40,8 @@ export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(paylo
   
   try{
     result = await axios.post(API_URL,{
-      name: payload.name,
-      image: payload.image,
+      product_name: payload.product_name,
+      img_url: payload.img_url,
       price: payload.price
     })
   }catch(err){
@@ -53,8 +56,8 @@ export const putItem = createAsyncThunk('LargeBreadSlice/putItem', async(payload
   
   try{
     result = await axios.put(`${API_URL}${payload?.id}/`,{
-      name: payload.name,
-      image: payload.image,
+      product_name: payload.product_name,
+      img_url: payload.img_url,
       price: payload.price
     })
   }catch(err){
