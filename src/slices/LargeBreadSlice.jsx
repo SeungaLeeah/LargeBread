@@ -3,7 +3,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit"
 import {pending, fulfilled, rejected} from '../Action';
 import axios from 'axios';
 
-const API_URL = "http://localhost:3001/product/";
+const API_URL = "http://localhost:3001/product/1/";
 
 /* 다중행 데이터 조회를 위한 비동기 함수 */
 export const getList = createAsyncThunk('LargeBreadSlice/getList', async(payload,{rejectValue})=>{
