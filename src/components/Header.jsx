@@ -67,6 +67,7 @@ const Header = styled.div`
 `;
 
 const header = memo(() => {
+    
     return (
         <Header>
             <div className='first-line'>
@@ -79,13 +80,13 @@ const header = memo(() => {
             <div className='main-menu'>
                 <div className='category'>
                     <ul>
-                        <NavLink className="menuList" to={'/product/1'}>케이크</NavLink>
-                        <NavLink className="menuList" to={'/product/2'}>마카롱</NavLink>
-                        <NavLink className="menuList" to={'/product/3'}>크로플</NavLink>
-                        <NavLink className="menuList" to={'/product/4'}>샌드위치</NavLink>
-                        <NavLink className="menuList" to={'/product/5'}>쿠키</NavLink>
-                        <NavLink className="menuList" to={'/product/6'}>빵</NavLink>
-                        <NavLink className="menuList" to={'/product/7'}>기타</NavLink>
+                        <NavLink className="menuList" to='/product/1'>케이크</NavLink>
+                        <NavLink className="menuList" to='/product/2'>마카롱</NavLink>
+                        <NavLink className="menuList" to='/product/6'>크로플</NavLink>
+                        <NavLink className="menuList" to='/product/5'>샌드위치</NavLink>
+                        <NavLink className="menuList" to='/product/4'>쿠키</NavLink>
+                        <NavLink className="menuList" to='/product/3'>빵</NavLink>
+                        <NavLink className="menuList" to='/product/7'>기타</NavLink>
                     </ul>
                 </div>
             </div>

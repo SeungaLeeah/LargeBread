@@ -10,8 +10,8 @@ const App = memo(() => {
       <GlobalStyles/>
       <LargeBread/>
       <Routes>
-        <Route path='/product/:api' exact element={<ItemList/>}/>
-        </Routes>
+        <Route path='/product/:category_id' element={<ItemList/>}/>
+      </Routes>
     </div>
   );
 });

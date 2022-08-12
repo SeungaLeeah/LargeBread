@@ -1,8 +1,9 @@
 import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
-import {getList} from '../slices/LargeBreadSlice';
+import {getItem} from '../slices/LargeBreadSlice';
 import {addToBasket} from '../slices/BasketSlice';
+import {useNavigate, useParams} from 'react-router-dom';
 
 const SingleItemContainer = styled.div`
 height: 100%;
@@ -56,15 +57,20 @@ const SingleItem = memo(() => {
 
     const {data,loading, error} = useSelector((state)=>state.LargeBreadSlice);
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const handleAddToBasket =(item) =>{
         dispatch(addToBasket(item));    
-    }
+    };
+    const params = useParams();
+    console.log(params.category_id);
 
     useEffect(()=>{
-        dispatch(getList());
-    }, [dispatch]);
-    
+        dispatch(getItem({
+            category_id: params.category_id
+        }));
+        navigate(`/product/${params.category_id}`);
+    }, [dispatch, navigate]);
+    console.log(data);
     
     return (
         <SingleItemContainer>
