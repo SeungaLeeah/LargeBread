@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../assets/img/logo/logo.png'
 
@@ -9,6 +10,7 @@ const MainPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     position: relative;
+
     .logoImg{
         width:350px;  
         height: 350px;
@@ -23,7 +25,10 @@ const MainPageContainer = styled.div`
             height: 30px;
             text-align: center;
             margin-top: 20px;
-            button{
+            
+            .button{
+                width: 50%;
+                margin: auto;
                 border: 3px solid  #fec24a;
                 font-size: 28px;
                 padding: 8px 25px;
@@ -31,6 +36,8 @@ const MainPageContainer = styled.div`
                 font-weight: bold;
                 border-radius: 5px;
                 color: #595959;
+                text-decoration: none;
+                cursor: pointer;
 
                 &:hover{
                     background-color: #fec24a;
@@ -38,8 +45,14 @@ const MainPageContainer = styled.div`
                 }
             }
             p{
+                
                 font-size: 14px;
-                margin-top: 10px;
+                font-weight: bold;
+                color: red;
+                margin-top: 20px;
+                &:visited{
+                    color: black;
+                }
             }
         }
     }
@@ -52,7 +65,7 @@ const StartPage = memo(() => {
             
 
             <div className='startBtn'>
-                <button>주문하기</button>
+                <NavLink to="product/1" className='button'>주문하기</NavLink>
                 <p>*주문하기를 눌러주세요</p>
             </div>
             </div>

@@ -17,7 +17,6 @@ const LargeBread = memo(() => {
     return (
         <LargeBreadContainer>
             <Header/>
-
             <ItemList/>
             <Footer/>
         </LargeBreadContainer>

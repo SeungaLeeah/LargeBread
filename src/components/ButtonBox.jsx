@@ -1,7 +1,6 @@
 import React, { memo,useEffect  } from 'react';
 import styled from 'styled-components';
 import DelButton from './DelButton';
-import ItemButton from './ItemButton';
 import PayButton from './PayButton';
 import {TotalPrice} from '../slices/BasketSlice'
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,54 +14,58 @@ const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 10px 0;
-    
+    .totalPay{
+        width: 90%;
+        height: 33.3%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: auto;
     .system-info{
         width: 100%;
         height: 33.3%;
-        margin: auto;
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
-        .time-info{
-            text-align: center;
-            font-weight: 700;
-            width: 40%;
-            font-size: 14px;
-            
-            p{
-                font-size: 14px;
-                b{
-                    color: #ae2a2f;
-                    font-size: 24px;
-                    font-weight: 900;
-                }
-                
+        align-items: flex-end;
+        font-weight: 700;
+        width: 40%;
+        font-size: 14px;
+
+        h3,
+        p{
+            padding-right:15px;
+            font-size: 20px;
+            b{
+                color: #ae2a2f;
+                font-size: 30px;
+                font-weight: 900;
             }
+            
         }
+    }
     }
 `;
 
 const ItemBox = memo(() => {
     useEffect(()=>console.clear(),[]);
     const {basketTotalAmount} = useSelector((state)=>state.basket);
+    const TotalAmount = basketTotalAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     const dispatch = useDispatch();
 
     useEffect(()=>{
         dispatch(TotalPrice())
-    },[basketTotalAmount, dispatch]);
+    },[TotalAmount, dispatch]);
 
     
     return (
         <ButtonContainer>
+            <div className='totalPay'>
             <div className='system-info'>
-            <div className='time-info'>
                 <h3>총 결재금액</h3>
-                <p><b>{basketTotalAmount}</b>원</p>
+                <p><b>{TotalAmount}</b>원</p>
+            </div>
             </div>
             <DelButton/>
-            </div>
-            <ItemButton/>
             <PayButton/>
         </ButtonContainer>
     );

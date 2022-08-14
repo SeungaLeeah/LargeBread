@@ -89,7 +89,6 @@ const dispatch = useDispatch();
         dispatch(addToBasket(basketItem));
     }
 
-
     const basket = useSelector((state)=>state.basket);
 
     return (

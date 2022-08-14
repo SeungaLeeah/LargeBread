@@ -1,5 +1,8 @@
-import React, { memo } from 'react';
-import styled from 'styled-components';
+import React, { memo, useCallback } from 'react';
+import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 const PayBtn = styled.div`
     width: 90%;
@@ -26,9 +29,38 @@ const PayBtn = styled.div`
     }
 `;
 const PayButton = memo(() => {
+    const PaySwal = withReactContent(Swal);
+    const navigate = useNavigate();
+
+    // Promise 방식을 사용한 다이얼로그
+    const onButton1Click = useCallback(() => {
+        let timerInterval
+        PaySwal.fire({
+            title: '결제중 입니다.',
+            html: '잠시만 기다려주세요.',
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading()
+          
+            },
+            willClose: () => {
+              clearInterval(timerInterval)
+            }
+          }).then((result) => {
+            /* Read more about handling dismissals below */
+            if (result.dismiss === Swal.DismissReason.timer) {
+              navigate("/");
+              PaySwal.fire({
+                icon: 'success',
+                title:'결제가 완료되었습니다.'
+              });
+            }
+          })
+    }, [PaySwal,navigate]);
     return (
         <PayBtn>
-            <div className='item-payBtn'>
+            <div  onClick={onButton1Click} className='item-payBtn'>
             결제하기
             </div>
         </PayBtn>

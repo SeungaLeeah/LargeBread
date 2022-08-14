@@ -2,17 +2,15 @@ import React, { memo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import LargeBread from './pages/LargeBread';
-import ItemList from './components/ItemList';
 import StartPage from './pages/StartPage';
 
 const App = memo(() => {
   return (
     <div>
       <GlobalStyles/>
-      <StartPage/>
       <Routes>
-        <Route path='/' element={<StartPage/>}/>
-      
+        <Route path='/' exapt={true} element={<StartPage/>}/>
+        <Route path='/product/:category_id' element={<LargeBread/>}/>
       </Routes>
     </div>
   );

@@ -84,7 +84,7 @@ const SingleItem = memo(() => {
                 <div className='itemBox'>
             {data && data.data.item.map((v, i) => {
                 return(
-                    <div className="itemList">
+                    <div className="itemList" key={i}>
                     <img className='imageBox'src={'http://localhost:3001/'+ v.img_url} alt={v.product_name}  />
                     <h3>{v.product_name}</h3>
                     <p>{v.price}원</p>
