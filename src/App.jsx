@@ -3,14 +3,16 @@ import { Routes, Route } from 'react-router-dom';
 import GlobalStyles from './GlobalStyles';
 import LargeBread from './pages/LargeBread';
 import ItemList from './components/ItemList';
+import StartPage from './pages/StartPage';
 
 const App = memo(() => {
   return (
     <div>
       <GlobalStyles/>
-      <LargeBread/>
+      <StartPage/>
       <Routes>
-        <Route path='/product/:category_id' element={<ItemList/>}/>
+        <Route path='/' element={<StartPage/>}/>
+      
       </Routes>
     </div>
   );
