@@ -68,5 +68,8 @@ table {
 	
     font-family: 'Noto Sans KR', sans-serif;
 }
+input{
+	border: none;
+}
 `;
 export default GlobalStyles;

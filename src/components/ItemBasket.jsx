@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSelector,useDispatch } from  'react-redux';
 import { addToBasket, removeFromBasket, DecreaseBasket } from '../slices/BasketSlice';
 
-const BasketContainer = styled.div`
+const BasketContainer = styled.form`
     width: 65%;
     height: 200px;
     background-color: white;
@@ -17,18 +17,24 @@ const BasketContainer = styled.div`
             padding: 15px 0;
 
             .basketItem{
-                width: 200px;
+                width: 180px;
                 .basketItem-info{
                     width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    margin: auto;
                     
-                h3{
-                    
+                .product_name{
+                    width: 100%;
                     font-weight: 700;
                     padding: 10px 0 ;
                     font-size: 14px;
                     color: black;
+                    text-align: center;
                 }
                 button{
+                    width: 80px;
+                    margin: auto;
                     border: 2px solid #f0f0f0;
                     border-radius: 5px;
                     background-color: white;
@@ -46,17 +52,31 @@ const BasketContainer = styled.div`
             .basketItem-price,    
             .basketItem-quantity,
             .total-price{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+            .product_price,
+            .basketItem-price{
+                width: 80px;
             }
         .basketItem-quantity{
-            button{
+            width: 180px;
+            display: flex;
+            justify-content: center;
+            .product_count{
+
+                width: 15%;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 500;
+            }
+            .button{
                 border: none;
                 border-radius: 5px;
                 background-color: #ae2a2f;
                 color: white;
-                padding: 3px 10px;
+                padding: 7px 10px;
                 font-size: 16px;
                 font-weight: 900;
                 cursor: pointer;
@@ -66,9 +86,6 @@ const BasketContainer = styled.div`
                     border-radius: 5px;
                     color: #ae2a2f;
                 }
-            }
-            .count{
-                padding: 15px;
             }
         }
     }
@@ -91,25 +108,27 @@ const dispatch = useDispatch();
     const basket = useSelector((state)=>state.basket);
 
     return (
-        <BasketContainer>
+        <BasketContainer onsubmit="return false">
                 <div className='itemBox'>
                  {basket.basketItems?.map(basketItem=>(
                     <div key={basketItem.id} className="itemList">
                         <div className='basketItem'>
                             <div className='basketItem-info'>
-                                <h3>{basketItem.product_name}</h3>
+                            <input className='product_name' type="text" id="product_name" name="product_name" value={basketItem.product_name} readonly />
                                 <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
                             </div>
                         </div>
-                        <div className='basketItem-price'>{basketItem.price}원</div>
+                        <div className='basketItem-price'>
+                        <input className='product_price' type="text" id="price" name="price" value={basketItem.price +"원"} readonly />
+                        </div>
                         <div className='basketItem-quantity'>
-                            <button onClick={()=>handleDecreaseBasket(basketItem)}>-</button>
-                            <div className='count'>{basketItem.basketQuantity}</div>
-                            <button onClick={()=>handleIncreaseBasket(basketItem)}>+</button>
+                            <div className='button' onClick={()=>handleDecreaseBasket(basketItem)}>-</div>
+                            <input className='product_count' type="text" id="ItemTotalPrice" name="ItemTotalPrice" value={basketItem.basketQuantity} readonly />
+                            <div className='button' onClick={()=>handleIncreaseBasket(basketItem)}>+</div>
                         </div>
                         <div className='total-price'>
-                            {basketItem.price * basketItem.basketQuantity}원
-                        </div>
+                            <input className='basketItem-price' type="text" id="ItemTotalPrice" name="ItemTotalPrice" value={basketItem.price * basketItem.basketQuantity +"원"} readonly />
+                          </div>
                     </div>
                 ))}
                 </div>

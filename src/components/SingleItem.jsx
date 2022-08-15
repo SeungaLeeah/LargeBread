@@ -19,8 +19,8 @@ margin: auto;
             text-align: center;
             padding: 10px 15px;
             .imageBox{
-                width: 200px;
-                height: 200px;
+                width: 150px;
+                height: 150px;
                 box-sizing: border-box;
                 margin: 10px; 
             }
