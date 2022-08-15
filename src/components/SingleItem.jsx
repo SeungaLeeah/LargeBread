@@ -8,19 +8,19 @@ import {useNavigate, useParams} from 'react-router-dom';
 const SingleItemContainer = styled.div`
 height: 100%;
 width: 100%;
+margin: auto;
     .itemBox{
         display: flex;
         flex-direction: row;
-        justify-content: space-evenly;
+        justify-content: left;
         flex-wrap: wrap;
   
         .itemList{
             text-align: center;
-            margin: auto;
-            padding: 10px 0;
+            padding: 10px 15px;
             .imageBox{
-                width: 150px;
-                height: 150px;
+                width: 200px;
+                height: 200px;
                 box-sizing: border-box;
                 margin: 10px; 
             }
@@ -69,7 +69,7 @@ const SingleItem = memo(() => {
             category_id: params.category_id
         }));
         navigate(`/product/${params.category_id}`);
-    }, [dispatch, navigate]);
+    }, [dispatch, navigate,params.category_id]);
     console.log(data);
     
     return (

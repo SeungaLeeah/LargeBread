@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { useDispatch } from  'react-redux';
 import {cleanBasket} from '../slices/BasketSlice'
 
-const DelBtnContainer = styled.div`
+const DelBtnContainer = styled.form`
   width: 90%;
     margin: auto;
     text-align: center;

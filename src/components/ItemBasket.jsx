@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { useSelector,useDispatch } from  'react-redux';
 import { addToBasket, removeFromBasket, DecreaseBasket } from '../slices/BasketSlice';
 
-
 const BasketContainer = styled.div`
     width: 65%;
     height: 200px;

@@ -8,7 +8,7 @@ const ItemListContainer = styled.div`
     background-color: #f0f0f0;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    margin: auto;
     padding: 30px 0;
     
    
