@@ -1,11 +1,11 @@
-import React, { memo, useCallback } from 'react';
+import React, { memo, useCallback,useEffect } from 'react';
 import styled from "styled-components";
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate,useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { addToBasket } from '../slices/BasketSlice';
-import { useState } from 'react';
+import { postItem } from '../slices/BasketSlice';
+
 
 const PayBtn = styled.form`
     width: 90%;
@@ -41,18 +41,17 @@ const PayBtn = styled.form`
 `;
 const PayButton = memo(() => {
     const PaySwal = withReactContent(Swal);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const basket = useSelector((state)=>state.basket);
-    const [data, setDate] = useState();
-
-    const handleAddToBasket =(item) =>{
-      dispatch(addToBasket(item));    
-  };
-  console.log(handleAddToBasket);
+    const params = useParams();
+ 
+    const dispatch = useDispatch();
+    
     // Promise 방식을 사용한 다이얼로그
-    const onButton1Click = useCallback((event) => {
+    const onSubmit = useCallback((e) => {
+        e.preventDefault();
+
         let timerInterval
+
         PaySwal.fire({
             title: '결제중 입니다.',
             html: '잠시만 기다려주세요.',
@@ -68,18 +67,23 @@ const PayButton = memo(() => {
           }).then((result) => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
-              navigate("/");
+                
+              dispatch(postItem({
+                id: params.id,
+                amount: params.amount
+              }))
+              navigate('/');
               PaySwal.fire({
                 icon: 'success',
                 title:'결제가 완료되었습니다.'
               });
             }
           })
-    }, [PaySwal,navigate]);
+    }, [PaySwal,navigate,dispatch,params.id,params.amount]);
     return (
-        <PayBtn>
-          <div onClick={onButton1Click} className='item-payBtn'>
-            <input onSubmit={handleAddToBasket} className='submitBtn' value="결제하기" type="submit"/>
+        <PayBtn >
+          <div onClick={onSubmit} className='item-payBtn'>
+            <input className='submitBtn' name='submit' value="결제하기" type="submit"/>
             </div>
         </PayBtn>
     );

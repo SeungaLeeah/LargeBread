@@ -45,33 +45,6 @@ export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(paylo
   return result;
 });
 
-/* 데이터 수정을 위한 비동기 함수 */
-export const putItem = createAsyncThunk('LargeBreadSlice/putItem', async(payload, { rejectWithValue})=>{
-  let result = null;
-  
-  try{
-    result = await axios.put(`${API_URL}${payload?.id}/`,{
-      product_name: payload.product_name,
-      img_url: payload.img_url,
-      price: payload.price
-    })
-  }catch(err){
-    result = rejectWithValue(err.response);
-  }
-  return result;
-});
-/* 데이터 삭제를 위한 비동기 함수 */
-export const deleteItem = createAsyncThunk('LargeBreadSlice/deleteItem', async(payload, { rejectWithValue})=>{
-  let result = null;
-  
-  try{
-    result = await axios.delete(`${API_URL}${payload?.id}/`);
-  }catch(err){
-    result = rejectWithValue(err.response);
-  }
-  return result;
-});
-
 const LargeBreadSlice = createSlice({
   name: 'LargeBreadSlice',
   initialState: {
@@ -111,52 +84,6 @@ const LargeBreadSlice = createSlice({
   },
   [postItem.rejected]: rejected,
 
-  /* 데이터 수정을 위한 액션 함수 */
-  [putItem.pending]: pending,
-  [putItem.fulfilled]: (state,{meta, payload})=>{
-    let data = null;
-
-    if(Array.isArray(state.data)){
-      data= [...state.data];
-
-      const index = data.findIndex(element => element.id === parseInt(meta.arg.id));
-
-      if(index !== undefined){
-        data.splice(index, 1, payload.data);
-      }
-    }else{
-      data = payload.data;
-    }
-    return{
-      data: data,
-      loading: false,
-      error: null
-    }
-  },
-  [putItem.rejected]: rejected,
-
-  /* 데이터 삭제를 위한 액션 함수 */
-  [deleteItem.pending]: pending,
-  [deleteItem.fulfilled]: (state,{meta,payload})=>{
-    let data = null;
-
-    if(Array.isArray(state.data)){
-      data = [...state.data];
-
-      const index = data.findIndex(element => element.id === parseInt(meta.arg.id));
-      console.log('index=' + index);
-
-      if(index !== undefined){
-        data.splice(index, 1);
-      }
-    }
-    return{
-      data: data,
-      loading:false,
-      error: null
-    }
-  },
-  [deleteItem.rejected]: rejected,
 
   },
 });

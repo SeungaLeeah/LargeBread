@@ -62,7 +62,7 @@ const SingleItem = memo(() => {
         dispatch(addToBasket(item));    
     };
     const params = useParams();
-    console.log(params.category_id);
+ 
 
     useEffect(()=>{
         dispatch(getItem({
@@ -70,7 +70,7 @@ const SingleItem = memo(() => {
         }));
         navigate(`/product/${params.category_id}`);
     }, [dispatch, navigate,params.category_id]);
-    console.log(data);
+
     
     return (
         <SingleItemContainer>

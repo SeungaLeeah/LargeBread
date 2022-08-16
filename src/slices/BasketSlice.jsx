@@ -1,16 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {pending, rejected} from '../Action';
+import axios from 'axios';
 
-const initialState ={
-    basketItems: localStorage.getItem("basketItems")
-     ? JSON.parse(localStorage.getItem("basketItems"))
-     : [],
-    basketTotalQuantity: 0,
-    basketTotalAmount: 0,
-};
+const API_URL = `http://localhost:3001`
+
+/* 데이터 저장을 위한 비동기 함수 */
+export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(payload, { rejectWithValue})=>{
+    let result = null;
+    
+    try{
+      result = await axios.post(API_URL,{
+        product_name: payload.product_name,
+        img_url: payload.img_url,
+        price: payload.price
+      })
+    }catch(err){
+      result = rejectWithValue(err.response);
+    }
+    return result;
+  });
 
 const BasketSlice = createSlice({
     name: 'basket',
-    initialState,
+    initialState: {
+        basketItems: localStorage.getItem("basketItems")
+        ? JSON.parse(localStorage.getItem("basketItems"))
+        : [],
+        basketTotalQuantity: 0,
+        basketTotalAmount: 0,
+
+        data: null,       
+        loading: false, 
+        error:null   
+    },
     reducers:{
         addToBasket(state, action){
             const itemIndex = state.basketItems.findIndex(
@@ -71,7 +93,27 @@ const BasketSlice = createSlice({
             state.basketTotalAmount = total;
         }
     },
-});
+    extraReducers: {
+    /* 데이터 저장을 위한 액션 함수 */
+        [postItem.pending]: pending,
+        [postItem.fulfilled]: (state,{meta,payload})=>{
+            let data = null;
+
+            if(Array.isArray(state.data)){
+            data=[...state.data];
+            data.push(payload.data);
+            }else{
+            data=payload.data;
+            }
+            return{
+            data: data,
+            loading: false,
+            error: null
+            }
+        },
+        [postItem.rejected]: rejected,
+            }
+        });
 
 export const { addToBasket, removeFromBasket, DecreaseBasket, cleanBasket, TotalPrice } = BasketSlice.actions;
 
