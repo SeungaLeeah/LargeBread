@@ -1,7 +1,7 @@
 import React, { memo, useCallback } from 'react';
 import styled from "styled-components";
-import { useNavigate,useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useSelector,useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { postItem } from '../slices/BasketSlice';
@@ -42,8 +42,9 @@ const PayBtn = styled.form`
 const PayButton = memo(() => {
     const PaySwal = withReactContent(Swal);
     const navigate = useNavigate();
-    const params = useParams();
- 
+    const basket = useSelector((state)=>state.basket);
+
+    console.log(basket.id);
     const dispatch = useDispatch();
     
     // Promise 방식을 사용한 다이얼로그
@@ -69,8 +70,8 @@ const PayButton = memo(() => {
             if (result.dismiss === Swal.DismissReason.timer) {
                 
               dispatch(postItem({
-                id: params.id,
-                amount: params.amount
+                id: basket.id,
+                amount: basket.amount
               }))
               navigate('/');
               PaySwal.fire({
@@ -79,7 +80,7 @@ const PayButton = memo(() => {
               });
             }
           })
-    }, [PaySwal,navigate,dispatch,params.id,params.amount]);
+    }, [PaySwal,navigate,dispatch,basket.id,basket.amount]);
     return (
         <PayBtn >
           <div onClick={onSubmit} className='item-payBtn'>

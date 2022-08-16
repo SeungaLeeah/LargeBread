@@ -114,20 +114,20 @@ const dispatch = useDispatch();
                     <div key={basketItem.id} className="itemList">
                         <div className='basketItem'>
                             <div className='basketItem-info'>
-                            <input className='product_name' type="text" id="product_name" name="product_name" defaultValue={basketItem.product_name} readonly />
+                            <input className='product_name' type="text" id="product_name" name="product_name" defaultValue={basketItem.product_name} readOnly />
                                 <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
                             </div>
                         </div>
                         <div className='basketItem-price'>
-                        <input className='product_price' type="text" id="price" name="price" defaultValue={basketItem.price +"원"} readonly />
+                        <input className='product_price' type="text" id="price" name="price" defaultValue={basketItem.price +"원"} readOnly />
                         </div>
                         <div className='basketItem-quantity'>
                             <div className='button' onClick={()=>handleDecreaseBasket(basketItem)}>-</div>
-                            <input className='product_count' type="text" id="ItemTotalPrice" name="ItemTotalPrice" defaultValue={basketItem.basketQuantity} readonly />
+                            <input className='product_count' type="text" id="ItemTotalPrice" name="ItemTotalPrice" defaultValue={basketItem.basketQuantity} readOnly />
                             <div className='button' onClick={()=>handleIncreaseBasket(basketItem)}>+</div>
                         </div>
                         <div className='total-price'>
-                            <input className='basketItem-price' type="text" id="ItemTotalPrice" name="ItemTotalPrice" defaultValue={basketItem.price * basketItem.basketQuantity +"원"} readonly />
+                            <input className='basketItem-price' type="text" id="ItemTotalPrice" name="ItemTotalPrice" defaultValue={basketItem.price * basketItem.basketQuantity +"원"} readOnly />
                           </div>
                     </div>
                 ))}
