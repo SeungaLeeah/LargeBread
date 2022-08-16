@@ -1,7 +1,7 @@
-import React, { memo, useCallback,useEffect } from 'react';
+import React, { memo, useCallback } from 'react';
 import styled from "styled-components";
 import { useNavigate,useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { postItem } from '../slices/BasketSlice';
@@ -83,7 +83,7 @@ const PayButton = memo(() => {
     return (
         <PayBtn >
           <div onClick={onSubmit} className='item-payBtn'>
-            <input className='submitBtn' name='submit' value="결제하기" type="submit"/>
+            <input className='submitBtn' name='submit' value="결제하기" type="submit" readOnly/>
             </div>
         </PayBtn>
     );
