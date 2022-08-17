@@ -93,7 +93,7 @@ const BasketContainer = styled.form`
 `;
 const ItemBasket = memo(() => {
     useEffect(()=>console.clear(),[]);
-const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleRemoveFromBasket = (basketItem)=>{
         dispatch(removeFromBasket(basketItem));
@@ -106,31 +106,34 @@ const dispatch = useDispatch();
     }
 
     const basket = useSelector((state)=>state.basket);
-
+    console.log(basket);
     return (
         <BasketContainer onsubmit="return false">
                 <div className='itemBox'>
-                 {basket.basketItems?.map(basketItem=>(
-                    <div key={basketItem.id} className="itemList">
-                        <div className='basketItem'>
-                            <div className='basketItem-info'>
-                            <input className='product_name' type="text" id="product_name" name="product_name" value={basketItem.product_name} readonly />
-                                <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
+                    {basket.basketItems?.map(basketItem=>(
+                        <div key={basketItem.id} className="itemList">
+                            <div className='basketItem'>
+                                <div className='basketItem-info'>
+                                <input className='product_name' type="text" id="product_name" name="product_name" value={basketItem.product_name} readonly />
+                                    <button onClick={()=>handleRemoveFromBasket(basketItem)}>주문삭제</button>
+                                </div>
+                            </div>
+
+                            <div className='basketItem-price'>
+                                <input className='product_price' type="text" id="price" name="price" value={basketItem.price +"원"} readonly />
+                            </div>
+
+                            <div className='basketItem-quantity'>
+                                <div className='button' onClick={()=>handleDecreaseBasket(basketItem)}>-</div>
+                                    <input className='product_count' type="text" id="ItemTotalPrice" name="ItemTotalPrice" value={basketItem.basketQuantity} readonly />
+                                <div className='button' onClick={()=>handleIncreaseBasket(basketItem)}>+</div>
+                            </div>
+
+                            <div className='total-price'>
+                                <input className='basketItem-price' type="text" id="ItemTotalPrice" name="ItemTotalPrice" value={basketItem.price * basketItem.basketQuantity +"원"} readonly />
                             </div>
                         </div>
-                        <div className='basketItem-price'>
-                        <input className='product_price' type="text" id="price" name="price" value={basketItem.price +"원"} readonly />
-                        </div>
-                        <div className='basketItem-quantity'>
-                            <div className='button' onClick={()=>handleDecreaseBasket(basketItem)}>-</div>
-                            <input className='product_count' type="text" id="ItemTotalPrice" name="ItemTotalPrice" value={basketItem.basketQuantity} readonly />
-                            <div className='button' onClick={()=>handleIncreaseBasket(basketItem)}>+</div>
-                        </div>
-                        <div className='total-price'>
-                            <input className='basketItem-price' type="text" id="ItemTotalPrice" name="ItemTotalPrice" value={basketItem.price * basketItem.basketQuantity +"원"} readonly />
-                          </div>
-                    </div>
-                ))}
+                    ))}
                 </div>
 
         </BasketContainer>

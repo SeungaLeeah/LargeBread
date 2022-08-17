@@ -1,18 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {pending, rejected} from '../Action';
 import axios from 'axios';
+import {cloneDeep} from 'lodash';
 
 const API_URL = `http://localhost:3001`
 
 /* 데이터 저장을 위한 비동기 함수 */
-export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(payload, { rejectWithValue})=>{
+export const addCart = createAsyncThunk('LargeBreadSlice/addCart', async(payload, { rejectWithValue})=>{
     let result = null;
     
     try{
-      result = await axios.post(API_URL,{
-        product_name: payload.product_name,
-        img_url: payload.img_url,
-        price: payload.price
+      result = await axios.post(`${API_URL}/product`,{
+        amount: payload.amount,
+        product_id: payload.product_id
       })
     }catch(err){
       result = rejectWithValue(err.response);
@@ -95,25 +95,20 @@ const BasketSlice = createSlice({
     },
     extraReducers: {
     /* 데이터 저장을 위한 액션 함수 */
-        [postItem.pending]: pending,
-        [postItem.fulfilled]: (state,{meta,payload})=>{
-            let data = null;
-
-            if(Array.isArray(state.data)){
-            data=[...state.data];
-            data.push(payload.data);
-            }else{
-            data=payload.data;
-            }
+        [addCart.pending]: pending,
+        [addCart.fulfilled]: (state,{meta,payload})=>{
+            const data = cloneDeep(state.data);
+            data.item.unshift(payload.data.item);
+            data.item.pop();
             return{
-            data: data,
-            loading: false,
-            error: null
+                data: data,
+                loading: false,
+                error: null
             }
         },
-        [postItem.rejected]: rejected,
-            }
-        });
+        [addCart.rejected]: rejected,
+    }
+});
 
 export const { addToBasket, removeFromBasket, DecreaseBasket, cleanBasket, TotalPrice } = BasketSlice.actions;
 

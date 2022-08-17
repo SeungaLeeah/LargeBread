@@ -62,7 +62,6 @@ const SingleItem = memo(() => {
         dispatch(addToBasket(item));    
     };
     const params = useParams();
- 
 
     useEffect(()=>{
         dispatch(getItem({
