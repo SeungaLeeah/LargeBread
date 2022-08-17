@@ -47,23 +47,29 @@ const Header = styled.div`
                 justify-content: space-between;
                 line-height: 40px;
                 
-                .menuList{
-                    text-decoration: none;
-                    font-size: 16px;
-                    font-weight: 600;
-                    color: white;
-                    padding: 10px 30px;
-                    cursor: pointer;
-                    
-                    &:hover{
-                        background-color: #f0f0f0;
-                        color: #ae2a2f;
-                        border-radius: 5px 5px 0 0;
-                    }
-                }
+            
             }
         }
     }
+`;
+const ManuLink = styled(NavLink)`
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    
+    padding: 10px 30px;
+    cursor: pointer;
+    &.active{
+        background-color: #f0f0f0;
+        color: #ae2a2f;
+        border-radius: 5px 5px 0 0;
+    }
+    &:hover{
+            background-color: #f0f0f0;
+            color: #ae2a2f;
+            border-radius: 5px 5px 0 0;
+        }  
 `;
 
 const header = memo(() => {
@@ -80,13 +86,13 @@ const header = memo(() => {
             <div className='main-menu'>
                 <div className='category'>
                     <ul>
-                        <NavLink className="menuList" to='/product/1'>케이크</NavLink>
-                        <NavLink className="menuList" to='/product/2'>마카롱</NavLink>
-                        <NavLink className="menuList" to='/product/3'>빵</NavLink>
-                        <NavLink className="menuList" to='/product/4'>쿠키</NavLink>
-                        <NavLink className="menuList" to='/product/5'>샌드위치</NavLink>
-                        <NavLink className="menuList" to='/product/6'>크로플</NavLink>
-                        <NavLink className="menuList" to='/product/7'>기타</NavLink>
+                        <ManuLink to='/product/1'>케이크</ManuLink>
+                        <ManuLink to='/product/2'>마카롱</ManuLink>
+                        <ManuLink to='/product/3'>빵</ManuLink>
+                        <ManuLink to='/product/4'>쿠키</ManuLink>
+                        <ManuLink to='/product/5'>샌드위치</ManuLink>
+                        <ManuLink to='/product/6'>크로플</ManuLink>
+                        <ManuLink to='/product/7'>기타</ManuLink>
                     </ul>
                 </div>
             </div>
