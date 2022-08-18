@@ -10,9 +10,9 @@ export const addCart = createAsyncThunk('LargeBreadSlice/addCart', async(payload
     let result = null;
     
     try{
-      result = await axios.post(`${API_URL}/product`,{
-        amount: payload.amount,
-        product_id: payload.product_id
+        result = await axios.post(`${API_URL}/product`,{
+            amount: payload.amount,
+            product_id: payload.product_id
       })
     }catch(err){
       result = rejectWithValue(err.response);
@@ -82,7 +82,7 @@ const BasketSlice = createSlice({
 
                 basketTotal.total += itemTotal
                 basketTotal.quantity += basketQuantity
-                basketTotal.amount = basketItem.id
+                basketTotal.amount = basketQuantity
 
                 return basketTotal;
                 },
