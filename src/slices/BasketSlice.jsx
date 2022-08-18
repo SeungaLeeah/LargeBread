@@ -28,6 +28,7 @@ const BasketSlice = createSlice({
         : [],
         basketTotalQuantity: 0,
         basketTotalAmount: 0,
+        basketQuantity:0,
 
         data: null,       
         loading: false, 
@@ -74,23 +75,26 @@ const BasketSlice = createSlice({
             localStorage.setItem("basketItems", JSON.stringify(state.basketItems));
         },
         TotalPrice(state, action){
-          let {total,quantity} = state.basketItems.reduce(
+          let {total,quantity, amount} = state.basketItems.reduce(
                 (basketTotal, basketItem)=>{
                 const {price, basketQuantity } = basketItem;
-                const itemTotal = price *basketQuantity;
+                const itemTotal = price * basketQuantity;
 
                 basketTotal.total += itemTotal
                 basketTotal.quantity += basketQuantity
-                
+                basketTotal.amount = basketItem.id
+
                 return basketTotal;
                 },
                 {
                     total: 0,
                     quantity: 0,
+                    amount:0,
                 }
             );
             state.basketTotalQuantity = quantity;
             state.basketTotalAmount = total;
+            state.basketQuantity= amount;
         }
     },
     extraReducers: {

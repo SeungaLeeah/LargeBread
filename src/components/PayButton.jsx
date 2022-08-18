@@ -71,7 +71,7 @@ const PayButton = memo(({id, amount}) => {
                 
               dispatch(addCart({
                 product_id: basket.basketItems[0].id,
-                amount: basket.basketTotalQuantity
+                amount: basket.basketQuantity
               }))
               navigate('/');
               PaySwal.fire({
