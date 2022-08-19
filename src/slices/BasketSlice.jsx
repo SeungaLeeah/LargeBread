@@ -101,8 +101,10 @@ const BasketSlice = createSlice({
     /* 데이터 저장을 위한 액션 함수 */
         [addCart.pending]: pending,
         [addCart.fulfilled]: (state,{meta,payload})=>{
-            const data = cloneDeep(state.data);
-            data.item.unshift(payload.data.item);
+            const data = cloneDeep(state?.data);
+            console.log(data);
+            console.log(state);
+            data?.item.unshift(payload.data.item);
             data.item.pop();
             return{
                 data: data,
