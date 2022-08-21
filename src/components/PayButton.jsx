@@ -68,11 +68,14 @@ const PayButton = memo(({id, amount}) => {
           }).then((result) => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
-                
-              dispatch(addCart({
-                product_id: basket.basketItems[0].id,
-                amount: basket.basketQuantity
-              }))
+              
+              basket.basketItems.map((v, i) => {
+                dispatch(addCart({
+                  product_id: v.id,
+                  amount: basket.basketQuantity
+                }))
+              })
+              
               PaySwal.fire({
                 icon: 'success',
                 title:'결제가 완료되었습니다.'
