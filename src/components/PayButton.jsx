@@ -69,12 +69,13 @@ const PayButton = memo(({id, amount}) => {
             /* Read more about handling dismissals below */
             if (result.dismiss === Swal.DismissReason.timer) {
               
-              basket.basketItems.map((v, i) => {
+              basket.basketItems.map((v, i)=> {
                 dispatch(addCart({
                   product_id: v.id,
-                  amount: basket.basketQuantity
+                  amount: v.basketQuantity
                 }))
-              })
+                return true;
+              });
               
               PaySwal.fire({
                 icon: 'success',
@@ -84,7 +85,7 @@ const PayButton = memo(({id, amount}) => {
               navigate('/');
             }
           })
-    }, [PaySwal, dispatch, basket.basketItems, basket.basketQuantity, navigate]);
+    }, [PaySwal, basket.basketItems, dispatch, navigate]);
     return (
         <PayBtn >
           <div onClick={onSubmit} className='item-payBtn'>
