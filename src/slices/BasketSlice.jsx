@@ -94,25 +94,24 @@ const BasketSlice = createSlice({
             );
             state.basketTotalQuantity = quantity;
             state.basketTotalAmount = total;
-            state.basketQuantity= amount;
+             state.basketQuantity= amount;
         }
     },
     extraReducers: {
     /* 데이터 저장을 위한 액션 함수 */
         [addCart.pending]: pending,
-        [addCart.fulfilled]: (state,{meta,payload})=>{
-            const data = cloneDeep(state?.data);
-            console.log(data);
-            console.log(state);
-            data?.item.unshift(payload.data.item);
-            data.item.pop();
+        [addCart.fulfilled]: (state,{payload})=>{
+            const data = cloneDeep(state.data);
+            console.log(data)
+            data.item.unshift(payload.data.item);
+          
             return{
                 data: data,
                 loading: false,
                 error: null
             }
         },
-        [addCart.rejected]: rejected,
+            [addCart.rejected]: rejected,
     }
 });
 
