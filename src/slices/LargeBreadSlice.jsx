@@ -29,21 +29,6 @@ export const getItem  = createAsyncThunk('LargeBreadSlice/getItem', async(payloa
   return result;
 });
 
-/* 데이터 저장을 위한 비동기 함수 */
-export const postItem = createAsyncThunk('LargeBreadSlice/postItem', async(payload, { rejectWithValue})=>{
-  let result = null;
-  
-  try{
-    result = await axios.post(API_URL,{
-      product_name: payload.product_name,
-      img_url: payload.img_url,
-      price: payload.price
-    })
-  }catch(err){
-    result = rejectWithValue(err.response);
-  }
-  return result;
-});
 
 const LargeBreadSlice = createSlice({
   name: 'LargeBreadSlice',
@@ -64,26 +49,6 @@ const LargeBreadSlice = createSlice({
   [getItem.pending]: pending,
   [getItem.fulfilled]: fulfilled,
   [getItem.rejected]: rejected,
-
-  /* 데이터 저장을 위한 액션 함수 */
-  [postItem.pending]: pending,
-  [postItem.fulfilled]: (state,{meta,payload})=>{
-    let data = null;
-
-    if(Array.isArray(state.data)){
-      data=[...state.data];
-      data.push(payload.data);
-    }else{
-      data=payload.data;
-    }
-    return{
-      data: data,
-      loading: false,
-      error: null
-    }
-  },
-  [postItem.rejected]: rejected,
-
 
   },
 });

@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import { addCart,cleanBasket } from '../slices/BasketSlice';
-
+import { cleanBasket } from '../slices/BasketSlice';
+import {addCart} from '../slices/PaySlice';
 
 const PayBtn = styled.form`
     width: 90%;
@@ -39,7 +39,7 @@ const PayBtn = styled.form`
         }
     }
 `;
-const PayButton = memo(({id, amount}) => {
+const PayButton = memo(() => {
     const PaySwal = withReactContent(Swal);
     const navigate = useNavigate();
     const basket = useSelector((state) => state.basket);
@@ -84,9 +84,10 @@ const PayButton = memo(({id, amount}) => {
               dispatch(cleanBasket());
               navigate('/');
             }
+            return true;
           })
-    }, [PaySwal, basket.basketItems, dispatch, navigate]);
-    return (
+        }, [PaySwal, dispatch, basket.basketItems, navigate]);
+            return (
         <PayBtn >
           <div onClick={onSubmit} className='item-payBtn'>
             <input className='submitBtn' name='submit' value="결제하기" type="submit"/>

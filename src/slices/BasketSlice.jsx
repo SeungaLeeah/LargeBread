@@ -1,24 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {pending, rejected} from '../Action';
-import axios from 'axios';
-import {cloneDeep} from 'lodash';
-
-const API_URL = `http://localhost:3001`
-
-/* 데이터 저장을 위한 비동기 함수 */
-export const addCart = createAsyncThunk('LargeBreadSlice/addCart', async(payload, { rejectWithValue})=>{
-    let result = null;
-    
-    try{
-        result = await axios.post(`${API_URL}/product`,{
-            amount: payload.amount,
-            product_id: payload.product_id
-      })
-    }catch(err){
-      result = rejectWithValue(err.response);
-    }
-    return result;
-  });
+import { createSlice } from "@reduxjs/toolkit";
 
 const BasketSlice = createSlice({
     name: 'basket',
@@ -94,25 +74,9 @@ const BasketSlice = createSlice({
             );
             state.basketTotalQuantity = quantity;
             state.basketTotalAmount = total;
-             state.basketQuantity= amount;
+            state.basketQuantity= amount;
         }
     },
-    extraReducers: {
-    /* 데이터 저장을 위한 액션 함수 */
-        [addCart.pending]: pending,
-        [addCart.fulfilled]: (state,{payload})=>{
-            const data = cloneDeep(state.data);
-            console.log(data)
-            data.item.unshift(payload.data.item);
-          
-            return{
-                data: data,
-                loading: false,
-                error: null
-            }
-        },
-            [addCart.rejected]: rejected,
-    }
 });
 
 export const { addToBasket, removeFromBasket, DecreaseBasket, cleanBasket, TotalPrice } = BasketSlice.actions;
