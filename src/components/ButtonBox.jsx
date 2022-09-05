@@ -60,7 +60,7 @@ const ItemBox = memo(() => {
             <div className='totalPay'>
             <div className='system-info'>
                 <h3>총 결재금액</h3>
-                <p><b>{basket.basketTotalAmount}</b>원</p>
+                <p><b>{basket.basketTotalAmount.toLocaleString()}</b>원</p>
             </div>
             </div>
             <DelButton/>
