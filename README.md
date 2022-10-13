@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ![header](https://capsule-render.vercel.app/api?text=LargeBread&fontAlignY=55&fontColor=ae2a2f&height=120&type=transparent)
 
 
@@ -39,8 +38,3 @@ Front-end : <a href="https://github.com/SeungaLeeah">이승아</a>(leeah0913@gma
 Back-end : <a href="https://github.com/juaehan">한주애</a>(juae0806@gmail.com)
 <br />
 
-
-
-=======
-# LargeBread
->>>>>>> 815845caee07de259d944ed7426d0125993ca353
